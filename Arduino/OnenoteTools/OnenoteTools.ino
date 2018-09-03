@@ -1,4 +1,5 @@
 #include <Keyboard.h>
+#include <Mouse.h>
 
 #define DIAL_1_PIN_1 18
 #define DIAL_1_PIN_2 19
@@ -23,7 +24,6 @@ int d1LastValue = 0;
 bool d1ButtonLastState = 0;
 bool buttonLastState = 0;
 uint8_t lightDuration = 1;
-uint8_t keyDelay = 100;
 
 unsigned long t = 0;
 unsigned long t2 = 0;
@@ -43,27 +43,47 @@ uint8_t tool5Lights[] = {255, 255, 200};
 uint8_t tool6Lights[] = {255, 200, 0};
 
 void useTool(uint8_t tool) {
-    /*Keyboard.write(KEY_LEFT_ALT);
-    delay(keyDelay);
-    
-    Keyboard.write(KEY_DOWN_ARROW);
-    delay(keyDelay);
-    
-    for (int i=0; i<(4); i++) {
-      Keyboard.write(KEY_RIGHT_ARROW);
-      delay(keyDelay);
+    for (int i=0; i<20; i++) {
+      Mouse.move(0, -100, 0);
     }
 
-    for (int i=0; i<(7-tool); i++) {
-      Keyboard.write(KEY_LEFT_ARROW);
-      delay(keyDelay);
+    for (int i=0; i<30; i++) {
+      Mouse.move(-100, 0, 0);
     }
-    
-    Keyboard.write(KEY_RETURN);
-    delay(keyDelay);
-    
-    Keyboard.write(KEY_ESC);
-    delay(keyDelay);*/
+
+    switch (tool) {
+        case 0:
+            Mouse.move(49, 0, 0);
+            Mouse.move(0, 35, 0);
+            break;
+
+        case 1:
+            Mouse.move(57, 0, 0);
+            Mouse.move(0, 35, 0);
+            break;
+
+        case 2:
+            Mouse.move(65, 0, 0);
+            Mouse.move(0, 35, 0);
+            break;
+
+        case 3:
+            Mouse.move(73, 0, 0);
+            Mouse.move(0, 35, 0);
+            break;
+
+        case 4:
+            Mouse.move(81, 0, 0);
+            Mouse.move(0, 35, 0);
+            break;
+
+        case 5:
+            Mouse.move(89, 0, 0);
+            Mouse.move(0, 35, 0);
+            break;
+    }
+
+    Mouse.click();
 }
 
 void setup () {
@@ -88,6 +108,8 @@ void setup () {
 
     t = millis();
     t2 = millis();
+
+    Mouse.begin();
 }
 
 void loop () {
