@@ -51,36 +51,48 @@ void useTool(uint8_t tool) {
       Mouse.move(-100, 0, 0);
     }
 
+    Mouse.move(84, 0, 0);
+    Mouse.move(0, 15, 0);
+    Mouse.click();
+    
+    for (int i=0; i<20; i++) {
+      Mouse.move(0, -100, 0);
+    }
+
+    for (int i=0; i<30; i++) {
+      Mouse.move(-100, 0, 0);
+    }
+
     switch (tool) {
-        case 0:
-            Mouse.move(44, 0, 0);
-            Mouse.move(0, 30, 0);
-            break;
+      case 0:
+          Mouse.move(44, 0, 0);
+          Mouse.move(0, 30, 0);
+          break;
 
-        case 1:
-            Mouse.move(52, 0, 0);
-            Mouse.move(0, 30, 0);
-            break;
+      case 1:
+          Mouse.move(52, 0, 0);
+          Mouse.move(0, 30, 0);
+          break;
 
-        case 2:
-            Mouse.move(60, 0, 0);
-            Mouse.move(0, 30, 0);
-            break;
+      case 2:
+          Mouse.move(60, 0, 0);
+          Mouse.move(0, 30, 0);
+          break;
 
-        case 3:
-            Mouse.move(68, 0, 0);
-            Mouse.move(0, 30, 0);
-            break;
+      case 3:
+          Mouse.move(68, 0, 0);
+          Mouse.move(0, 30, 0);
+          break;
 
-        case 4:
-            Mouse.move(76, 0, 0);
-            Mouse.move(0, 30, 0);
-            break;
+      case 4:
+          Mouse.move(76, 0, 0);
+          Mouse.move(0, 30, 0);
+          break;
 
-        case 5:
-            Mouse.move(84, 0, 0);
-            Mouse.move(0, 30, 0);
-            break;
+      case 5:
+          Mouse.move(84, 0, 0);
+          Mouse.move(0, 30, 0);
+          break;
     }
 
     Mouse.click();
@@ -155,8 +167,10 @@ void loop () {
         t = millis();
     }
 
-    if (millis() - t2 > 5000) {
+    if (millis() - t2 > 30000) {
       turnOffAllLEDs();
+    } else if (millis() - t2 > 5000) {
+      idleLEDs(currentTool);
     } else {
       updateLEDs(currentTool);
     }
@@ -248,4 +262,51 @@ void updateLEDs(uint8_t tool) {
 
     if (tool == 5) {delay(lightDuration*5);}
     delay(lightDuration);
+}
+
+void idleLEDs(uint8_t tool) {
+    switch (tool) {
+      case 0:
+        analogWrite(RED_PIN, tool1Lights[0]);
+        analogWrite(GREEN_PIN, tool1Lights[1]);
+        analogWrite(BLUE_PIN, tool1Lights[2]);
+        break;
+
+      case 1:
+        analogWrite(RED_PIN, tool2Lights[0]);
+        analogWrite(GREEN_PIN, tool2Lights[1]);
+        analogWrite(BLUE_PIN, tool2Lights[2]);
+        break;
+
+      case 2:
+        analogWrite(RED_PIN, tool3Lights[0]);
+        analogWrite(GREEN_PIN, tool3Lights[1]);
+        analogWrite(BLUE_PIN, tool3Lights[2]);
+        break;
+
+      case 3:
+        analogWrite(RED_PIN, tool4Lights[0]);
+        analogWrite(GREEN_PIN, tool4Lights[1]);
+        analogWrite(BLUE_PIN, tool4Lights[2]);
+        break;
+
+      case 4:
+        analogWrite(RED_PIN, tool5Lights[0]);
+        analogWrite(GREEN_PIN, tool5Lights[1]);
+        analogWrite(BLUE_PIN, tool5Lights[2]);
+        break;
+
+      case 5:
+        analogWrite(RED_PIN, tool6Lights[0]);
+        analogWrite(GREEN_PIN, tool6Lights[1]);
+        analogWrite(BLUE_PIN, tool6Lights[2]);
+        break;
+    }
+
+    digitalWrite(LED_1, 0);
+    digitalWrite(LED_2, 0);
+    digitalWrite(LED_3, 0);
+    digitalWrite(LED_4, 0);
+    digitalWrite(LED_5, 0);
+    digitalWrite(LED_6, 0);
 }
