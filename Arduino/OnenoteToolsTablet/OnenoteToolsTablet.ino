@@ -23,7 +23,7 @@ int d1Counter = 0;
 int d1LastValue = 0;
 bool d1ButtonLastState = 0;
 bool buttonLastState = 0;
-uint8_t lightDuration = 1;
+uint8_t lightDuration = 10;
 
 unsigned long t = 0;
 unsigned long t2 = 0;
@@ -215,8 +215,8 @@ void updateLEDs(uint8_t tool) {
     analogWrite(BLUE_PIN, tool1Lights[2]);
     digitalWrite(LED_1, 0);
 
-    if (tool == 0) {delay(lightDuration*5);}
-    delay(lightDuration);
+    if (tool == 0) {delayMicroseconds(lightDuration*50);}
+    delayMicroseconds(lightDuration);
 
     turnOffAllLEDs();    
     analogWrite(RED_PIN, tool2Lights[0]);
@@ -224,8 +224,8 @@ void updateLEDs(uint8_t tool) {
     analogWrite(BLUE_PIN, tool2Lights[2]);
     digitalWrite(LED_2, 0);
 
-    if (tool == 1) {delay(lightDuration*5);}
-    delay(lightDuration);
+    if (tool == 1) {delayMicroseconds(lightDuration*50);}
+    delayMicroseconds(lightDuration);
 
     turnOffAllLEDs();    
     analogWrite(RED_PIN, tool3Lights[0]);
@@ -233,8 +233,8 @@ void updateLEDs(uint8_t tool) {
     analogWrite(BLUE_PIN, tool3Lights[2]);
     digitalWrite(LED_3, 0);
 
-    if (tool == 2) {delay(lightDuration*5);}
-    delay(lightDuration);
+    if (tool == 2) {delayMicroseconds(lightDuration*50);}
+    delayMicroseconds(lightDuration);
 
     turnOffAllLEDs();
     analogWrite(RED_PIN, tool4Lights[0]);
@@ -242,8 +242,8 @@ void updateLEDs(uint8_t tool) {
     analogWrite(BLUE_PIN, tool4Lights[2]);
     digitalWrite(LED_4, 0);
 
-    if (tool == 3) {delay(lightDuration*5);}
-    delay(lightDuration);
+    if (tool == 3) {delayMicroseconds(lightDuration*50);}
+    delayMicroseconds(lightDuration);
 
     turnOffAllLEDs();
     analogWrite(RED_PIN, tool5Lights[0]);
@@ -251,8 +251,8 @@ void updateLEDs(uint8_t tool) {
     analogWrite(BLUE_PIN, tool5Lights[2]);
     digitalWrite(LED_5, 0);
 
-    if (tool == 4) {delay(lightDuration*5);}
-    delay(lightDuration);
+    if (tool == 4) {delayMicroseconds(lightDuration*50);}
+    delayMicroseconds(lightDuration);
 
     turnOffAllLEDs();
     analogWrite(RED_PIN, tool6Lights[0]);
@@ -260,8 +260,8 @@ void updateLEDs(uint8_t tool) {
     analogWrite(BLUE_PIN, tool6Lights[2]);
     digitalWrite(LED_6, 0);
 
-    if (tool == 5) {delay(lightDuration*5);}
-    delay(lightDuration);
+    if (tool == 5) {delayMicroseconds(lightDuration*50);}
+    delayMicroseconds(lightDuration);
 }
 
 void idleLEDs(uint8_t tool) {
