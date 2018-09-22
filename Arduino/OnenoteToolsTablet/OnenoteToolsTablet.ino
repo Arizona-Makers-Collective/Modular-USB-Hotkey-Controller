@@ -131,10 +131,18 @@ void loop () {
     if (d1Counter != d1LastValue) {
         uint8_t d1Change = d1Counter < d1LastValue ? 0 : (d1Counter > d1LastValue ? 2 : 1);
 
-        if (d1Change == 0) {
-            currentTool = currentTool == 0 ? 5 : currentTool-1;
-        } else if (d1Change == 2) {
-            currentTool = currentTool == 5 ? 0 : currentTool+1;
+        if(dialButtonState == 1) {
+          if (d1Change == 0) {
+              currentTool = currentTool == 0 ? 5 : currentTool-1;
+          } else if (d1Change == 2) {
+              currentTool = currentTool == 5 ? 0 : currentTool+1;
+          }
+        } else {
+          if (d1Change == 0) {
+              Mouse.move(0, 0, -1);
+          } else if (d1Change == 2) {
+              Mouse.move(0, 0, 1);
+          }
         }
         
         useTool(currentTool);
@@ -157,7 +165,7 @@ void loop () {
     d1ButtonLastState = dialButtonState;
     buttonLastState = buttonState;
 
-    if (millis() - t > 500) {
+    /*if (millis() - t > 500) {
         Serial.print("D1: ");
         Serial.print(d1Counter);
 
@@ -165,11 +173,11 @@ void loop () {
         Serial.println(currentTool);
 
         t = millis();
-    }
+    }*/
 
-    if (millis() - t2 > 30000) {
+    if (millis() - t2 > 60000) {
       turnOffAllLEDs();
-    } else if (millis() - t2 > 5000) {
+    } else if (millis() - t2 > 1000) {
       idleLEDs(currentTool);
     } else {
       updateLEDs(currentTool);
