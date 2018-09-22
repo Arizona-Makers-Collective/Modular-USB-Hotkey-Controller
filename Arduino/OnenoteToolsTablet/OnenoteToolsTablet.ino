@@ -131,23 +131,24 @@ void loop () {
     if (d1Counter != d1LastValue) {
         uint8_t d1Change = d1Counter < d1LastValue ? 0 : (d1Counter > d1LastValue ? 2 : 1);
 
-        if(dialButtonState == 1) {
+        if(dialButtonState == 0) {
           if (d1Change == 0) {
               currentTool = currentTool == 0 ? 5 : currentTool-1;
           } else if (d1Change == 2) {
               currentTool = currentTool == 5 ? 0 : currentTool+1;
           }
+          useTool(currentTool);
+          t2 = millis();
         } else {
           if (d1Change == 0) {
-              Mouse.move(0, 0, -1);
-          } else if (d1Change == 2) {
+              Mouse.move(0, 30, 0);
               Mouse.move(0, 0, 1);
+          } else if (d1Change == 2) {
+              Mouse.move(0, 30, 0);
+              Mouse.move(0, 0, -1);
           }
+          t2 = millis() - 1600;
         }
-        
-        useTool(currentTool);
-
-        t2 = millis();
     }
     
     if (dialButtonState != d1ButtonLastState && dialButtonState == 0) {
@@ -177,7 +178,7 @@ void loop () {
 
     if (millis() - t2 > 60000) {
       turnOffAllLEDs();
-    } else if (millis() - t2 > 1000) {
+    } else if (millis() - t2 > 1500) {
       idleLEDs(currentTool);
     } else {
       updateLEDs(currentTool);
